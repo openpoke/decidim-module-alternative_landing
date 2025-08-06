@@ -1,0 +1,82 @@
+<%
+  meetings = meetings()
+  posts = posts()
+%>
+
+<section class="alternative-landing sidebar-right-stack">
+  <div class="column_one p-[4rem]" style="background-image: url(<%= background_image %>); background-size: contain; background-repeat: no-repeat; background-size: 25% auto;
+  background-repeat: no-repeat;
+  background-position-y: bottom 6px;
+  background-position-x: right;">
+    <div>
+      <h2 class="text-[4rem] mt-4 mb-4 text-pretty uppercase font-bold">
+        <%= decidim_sanitize translated_title("sidebar") %>
+      </h2>
+    </div>
+    <div class="text-4xl w-2/3 text-balance">
+      <p><%= translated_body %></p>
+    </div>
+    <div>
+      <a href="<%= translated_url("sidebar")%>" class="button button__sm md:button__lg button__secondary no-underline mt-4">
+        <%= translated_link_text("sidebar") %>
+      </a>
+    </div>
+
+  </div>
+  <div class="column_two text-center ">
+    <div class="stack_one w-[50vw]">
+      <div class="w-[50vw]">
+        <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("meetings") %> </h2>
+      </div>
+      <div id="alternative-landing-sidebar-splide-meeting" class="splide w-[50vw] m-auto">
+        <div class="splide__slider">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <% meetings.each do |meeting|%>
+                <li class="splide__slide meeting">
+                  <%
+                  formatted_date = l(meeting.start_time, format: :long)
+                  %>
+                  <h3 class="text-2xl"><%= translated_attribute(meeting.title) %></h3>
+                  <p><%= "#{formatted_date}" %></p>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a href="<%= translated_url("meetings") %>" class="button button__sm md:button__lg button__secondary no-underline mt-4">
+          <%= translated_link_text("meetings") %>
+        </a>
+      </div>
+    </div>
+    <div class="stack_two w-[50vw]">
+      <div class="w-[50vw]">
+        <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("posts")%></h2>
+      </div>
+      <div id="alternative-landing-sidebar-splide-post"class="splide w-[50vw] m-auto">
+        <div class="splide__slider">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <% posts.each do |post|%>
+                <li class="splide__slide post">
+                  <h3 class="text-2xl"><%= translated_attribute(post.title) %></h3>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a href="<%= translated_url("posts") %>" class="button button__sm md:button__lg button__secondary no-underline mt-4">
+          <%= translated_link_text("posts") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= append_javascript_pack_tag "decidim_splide" %>
