@@ -3,8 +3,8 @@
   posts = posts()
 %>
 
-<section class="alternative-landing sidebar-right-stack flex flex-col md:grid md:grid-cols-2">
-  <div class="column_one h-[max(80vh, fit-content)] bg-no-repeat border-b-4 md:border-b-0 p-4 md:p-[4rem] md:border-r-4" style="background-image: url(<%= background_image %>);">
+<section class="alternative-landing sidebar-right-stack flex flex-col md:grid md:grid-cols-2 border-b-4">
+  <div class="column_one h-[max(80vh, fit-content)]  bg-no-repeat border-b-4 md:border-b-0 p-4 md:p-[4rem] md:border-r-4" style="background-image: url(<%= background_image %>);">
     <div>
       <h2 class="grid grid-cols-[1fr, 2fr, 1fr] text-5xl md:text-[4rem] md:mt-4 md:mb-4 text-pretty uppercase font-bold">
         <%= decidim_sanitize translated_title("sidebar") %>
@@ -21,7 +21,7 @@
 
   </div>
   <div class="column_two h-[max(80vh, fit-content)] text-center grid grid-rows-2">
-    <div class="stack_one w-[100vw] md:w-[50vw] border-b-4 grid grid-rows-3">
+    <div class="stack_one h-[40vh] w-[100vw] md:w-[50vw] border-b-4 grid grid-rows-3">
       <div class="w-[100vw] md:w-[50vw]">
         <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("meetings") %> </h2>
       </div>
@@ -30,7 +30,7 @@
           <div class="splide__track">
             <ul class="splide__list">
               <% meetings.each do |meeting|%>
-                <li class="splide__slide meeting">
+                <li class="splide__slide min-h-[100px] ">
                   <%
                   formatted_date = l(meeting.start_time, format: :long)
                   %>
@@ -49,7 +49,7 @@
         </a>
       </div>
     </div>
-    <div class="stack_two w-[100vw] md:w-[50vw] grid grid-rows-3">
+    <div class="stack_two h-[40vh] w-[100vw] md:w-[50vw] grid grid-rows-3">
       <div class="w-[100vw] md:w-[50vw]">
         <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("posts")%></h2>
       </div>

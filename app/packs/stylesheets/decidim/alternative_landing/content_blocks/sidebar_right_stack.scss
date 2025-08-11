@@ -4,22 +4,8 @@
 .alternative-landing {
   &.sidebar-right-stack {
     .column_one {
-      background-position-y: bottom 6px;
-      background-position-x: right;
+      background-position: bottom right;
       background-size: 25%;
-    }
-
-    .column_two {
-      .stack_one {
-        height: 40vh;
-
-        .meeting {
-          min-height: 100px;
-        }
-      }
-      .stack_two {
-        height: 40vh;
-      }
     }
   }
 }
