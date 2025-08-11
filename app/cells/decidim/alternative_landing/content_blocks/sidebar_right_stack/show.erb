@@ -3,17 +3,14 @@
   posts = posts()
 %>
 
-<section class="alternative-landing sidebar-right-stack">
-  <div class="column_one p-[4rem]" style="background-image: url(<%= background_image %>); background-size: contain; background-repeat: no-repeat; background-size: 25% auto;
-  background-repeat: no-repeat;
-  background-position-y: bottom 6px;
-  background-position-x: right;">
+<section class="alternative-landing sidebar-right-stack flex flex-col md:grid md:grid-cols-2">
+  <div class="column_one h-[max(80vh, fit-content)] bg-no-repeat border-b-4 md:border-b-0 p-4 md:p-[4rem] md:border-r-4" style="background-image: url(<%= background_image %>);">
     <div>
-      <h2 class="text-[4rem] mt-4 mb-4 text-pretty uppercase font-bold">
+      <h2 class="grid grid-cols-[1fr, 2fr, 1fr] text-5xl md:text-[4rem] md:mt-4 md:mb-4 text-pretty uppercase font-bold">
         <%= decidim_sanitize translated_title("sidebar") %>
       </h2>
     </div>
-    <div class="text-4xl w-2/3 text-balance">
+    <div class="text-2xl md:text-4xl w-2/3 text-balance">
       <p><%= translated_body %></p>
     </div>
     <div>
@@ -23,12 +20,12 @@
     </div>
 
   </div>
-  <div class="column_two text-center ">
-    <div class="stack_one w-[50vw]">
-      <div class="w-[50vw]">
+  <div class="column_two h-[max(80vh, fit-content)] text-center grid grid-rows-2">
+    <div class="stack_one w-[100vw] md:w-[50vw] border-b-4 grid grid-rows-3">
+      <div class="w-[100vw] md:w-[50vw]">
         <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("meetings") %> </h2>
       </div>
-      <div id="alternative-landing-sidebar-splide-meeting" class="splide w-[50vw] m-auto">
+      <div id="alternative-landing-sidebar-splide-meeting" class="splide w-[100vw] md:w-[50vw] m-auto">
         <div class="splide__slider">
           <div class="splide__track">
             <ul class="splide__list">
@@ -52,11 +49,11 @@
         </a>
       </div>
     </div>
-    <div class="stack_two w-[50vw]">
-      <div class="w-[50vw]">
+    <div class="stack_two w-[100vw] md:w-[50vw] grid grid-rows-3">
+      <div class="w-[100vw] md:w-[50vw]">
         <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("posts")%></h2>
       </div>
-      <div id="alternative-landing-sidebar-splide-post"class="splide w-[50vw] m-auto">
+      <div id="alternative-landing-sidebar-splide-post"class="splide w-[100vw] md:w-[50vw] m-auto">
         <div class="splide__slider">
           <div class="splide__track">
             <ul class="splide__list">
