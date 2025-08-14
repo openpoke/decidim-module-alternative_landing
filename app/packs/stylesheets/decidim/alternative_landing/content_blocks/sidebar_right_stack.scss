@@ -2,12 +2,20 @@
 @import "@splidejs/splide/dist/css/splide.min.css";
 
 .alternative-landing {
-  padding: 0;
-
   &.sidebar-right-stack {
     .column_one {
       background-position: bottom right;
       background-size: 25%;
+    }
+
+    .splide__arrow {
+      &.splide__arrow--prev {
+        left: -3em;
+      }
+
+      &.splide__arrow--next {
+        right: -3em;
+      }
     }
   }
 }
