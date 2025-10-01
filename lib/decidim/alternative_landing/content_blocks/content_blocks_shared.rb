@@ -114,6 +114,7 @@ require "decidim/alternative_landing"
       settings.attribute :link_url, type: :text, translated: true
       settings.attribute :count, type: :integer, default: 3
       settings.attribute :component_id, type: :integer
+      settings.attribute :filter, type: :string, default: "all"
     end
   end
 
