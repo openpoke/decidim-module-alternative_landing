@@ -24,6 +24,14 @@ module Decidim
           end.unshift [t(".all"), nil]
         end
 
+        def available_filters
+          [
+            [t("latest_blog_posts_settings_form.filter.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
+            [t("latest_blog_posts_settings_form.filter.organization", scope: "decidim.alternative_landing.content_blocks"), "organization"],
+            [t("latest_blog_posts_settings_form.filter.users", scope: "decidim.alternative_landing.content_blocks"), "users"]
+          ]
+        end
+
         def component
           @component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:component_id))
         end
