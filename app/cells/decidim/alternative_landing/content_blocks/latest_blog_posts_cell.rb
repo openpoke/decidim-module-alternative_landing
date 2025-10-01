@@ -20,9 +20,16 @@ module Decidim
         end
 
         def posts
-          @posts ||= Blogs::Post.where(
-            component: component || components
-          ).limit(posts_to_show).order(created_at: :desc)
+          scope = Blogs::Post.where(component: component || components)
+
+          case model.settings.filter
+          when "organization"
+            scope = scope.where(decidim_author_type: "Decidim::Organization")
+          when "users"
+            scope = scope.where(decidim_author_type: ["Decidim::User", "Decidim::UserGroup"])
+          end
+
+          scope.limit(posts_to_show).order(created_at: :desc)
         end
 
         private
