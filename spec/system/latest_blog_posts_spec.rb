@@ -14,7 +14,8 @@ describe "Visit the home page", :perform_enqueued do
       {
         title: Decidim::Faker::Localized.sentence,
         link_text: Decidim::Faker::Localized.sentence,
-        link_url: { en: "https://url-en.org" }
+        link_url: { en: "https://url-en.org" },
+        filter: "all"
       }
     end
     let!(:latest_blog_posts_block) { create(:latest_blog_posts_block, organization:, settings:) }
@@ -52,6 +53,41 @@ describe "Visit the home page", :perform_enqueued do
           within ".latest-blog-posts" do
             other_blog_posts.each do |blog_post|
               expect(page).not_to have_i18n_content(blog_post.title)
+            end
+          end
+        end
+      end
+
+      context "when 'filter' option is set" do
+        let!(:user_blog_posts) { create_list(:post, 4, component: blogs_component, decidim_author_type: "Decidim::UserBaseEntity") }
+        let!(:organization_blog_posts) { create_list(:post, 2, component: blogs_component, decidim_author_type: "Decidim::Organization") }
+
+        it "renders all the posts" do
+          within ".latest-blog-posts" do
+            expect(user_blog_posts.count).to eq 4
+            expect(organization_blog_posts.count).to eq 2
+          end
+        end
+
+        context "when filter is set to 'users'" do
+          let!(:settings) { { count: 4, filter: "users" } }
+
+          it "renders only posts from users" do
+            expect(latest_blog_posts_block.settings.filter).not_to eq "orgaization"
+            expect(latest_blog_posts_block.settings.filter).to eq "users"
+            within ".latest-blog-posts" do
+              expect(page).to have_css(".latest-blog-posts a", count: 4)
+            end
+          end
+        end
+
+        context "when filter is set to 'all'" do
+          let!(:settings) { { count: 10 } }
+
+          it "renders posts from all authors" do
+            expect(latest_blog_posts_block.settings.filter).to eq "all"
+            within ".latest-blog-posts" do
+              expect(page).to have_css(".latest-blog-posts a", count: 6)
             end
           end
         end
