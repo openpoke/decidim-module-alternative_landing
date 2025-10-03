@@ -2,7 +2,7 @@
   <% form.fields_for :settings, form.object.settings do |settings_fields| %>
     <div class="card" data-component="accordion" id="accordion-homepage_sidebar_title">
       <div class="card-divider">
-        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_sidebar_title" type="button">
+        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_sidebar_title" type="button" style="background-color: transparent; border-top: none; border-left: none; border-right: none; outline-color:transparent;">
           <%= icon "arrow-right-s-line" %>
           <h2 class="card-title" id="homepage_sidebar_title">
             <%= t(".settings_sidebar") %>
@@ -32,7 +32,7 @@
 
     <div class="card" data-component="accordion" id="accordion-homepage_meetings_title">
       <div class="card-divider">
-        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_meetings_title" type="button">
+        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_meetings_title" type="button" style="background-color: transparent; border-top: none; border-left: none; border-right: none; outline-color:transparent;">
           <%= icon "arrow-right-s-line" %>
           <h2 class="card-title" id="homepage_meetings_title">
             <%= t(".settings_meetings") %>
@@ -52,7 +52,7 @@
 
     <div class="card" data-component="accordion" id="accordion-homepage_posts_title">
       <div class="card-divider">
-        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_posts_title" type="button">
+        <button class="card-divider-button" data-open="true" data-controls="panel-homepage_posts_title" type="button" style="background-color: transparent; border-top: none; border-left: none; border-right: none; outline-color:transparent;">
           <%= icon "arrow-right-s-line" %>
           <h2 class="card-title" id="homepage_posts_title">
             <%= t(".settings_posts") %>
@@ -66,6 +66,8 @@
         <div class="row column">
           <%= settings_fields.translated :text_field, :"link_text_posts", label: t(".link_text") %>
           <%= settings_fields.translated :text_field, :"link_url_posts", label: t(".link_url") %>
+
+          <%= settings_fields.select :filter_posts, available_posts, label: t("sidebar_right_stack_settings_form.filter_posts.name", scope: "decidim.alternative_landing.content_blocks") %>
         </div>
       </div>
     </div>

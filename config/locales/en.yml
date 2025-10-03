@@ -94,6 +94,7 @@ en:
             organization: Organization
             users: Users
           image: Background image
+          info_posts: Only posts from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
           link_text: Link text
           link_url: Link URL
           settings_meetings: Meetings

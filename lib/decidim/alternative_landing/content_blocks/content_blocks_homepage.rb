@@ -29,9 +29,11 @@ def initialize_homepage_content_blocks
         settings.attribute :title_meetings, type: :text, translated: true
         settings.attribute :link_text_meetings, type: :text, translated: true
         settings.attribute :link_url_meetings, type: :text, translated: true
+        settings.attribute :meetings_component_id, type: :integer
         settings.attribute :title_posts, type: :text, translated: true
         settings.attribute :link_text_posts, type: :text, translated: true
         settings.attribute :link_url_posts, type: :text, translated: true
+        settings.attribute :posts_component_id, type: :integer
         settings.attribute :filter_posts, type: :string, default: "all"
       end
 

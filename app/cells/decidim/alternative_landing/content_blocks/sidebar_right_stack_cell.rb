@@ -42,6 +42,14 @@ module Decidim
 
           scope.limit(posts_to_show).order(created_at: :desc)
         end
+
+        def meetings_component
+          @meetings_component ||= Decidim::Component.find_by(id: model.settings.meetings_component_id)
+        end
+
+        def posts_component
+          @posts_component ||= Decidim::Component.find_by(id: model.settings.posts_component_id)
+        end
       end
     end
   end

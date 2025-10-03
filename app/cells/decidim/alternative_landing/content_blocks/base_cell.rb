@@ -24,12 +24,25 @@ module Decidim
           end.unshift [t(".all"), nil]
         end
 
+        def available_post_components
+          @available_post_components ||= components
+            .where(manifest_name: "blogs")
+            .map do |component|
+              ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})",
+                component.id]
+            end.unshift [t(".all"), nil]
+        end
+
         def available_posts
           [
             [t("sidebar_right_stack_settings_form.filter_posts.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
             [t("sidebar_right_stack_settings_form.filter_posts.organization", scope: "decidim.alternative_landing.content_blocks"), "organization"],
             [t("sidebar_right_stack_settings_form.filter_posts.users", scope: "decidim.alternative_landing.content_blocks"), "users"]
           ]
+        end
+
+        def posts_component
+          @posts_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:posts_component_id))
         end
 
         def component
