@@ -24,6 +24,14 @@ module Decidim
           end.unshift [t(".all"), nil]
         end
 
+        def available_posts
+          [
+            [t("sidebar_right_stack_settings_form.filter_posts.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
+            [t("sidebar_right_stack_settings_form.filter_posts.organization", scope: "decidim.alternative_landing.content_blocks"), "organization"],
+            [t("sidebar_right_stack_settings_form.filter_posts.users", scope: "decidim.alternative_landing.content_blocks"), "users"]
+          ]
+        end
+
         def component
           @component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:component_id))
         end
