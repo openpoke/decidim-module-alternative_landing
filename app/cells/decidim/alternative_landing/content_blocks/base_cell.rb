@@ -25,12 +25,15 @@ module Decidim
         end
 
         def available_post_components
-          @available_post_components ||= components
-            .where(manifest_name: "blogs")
-            .map do |component|
-              ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})",
-                component.id]
-            end.unshift [t(".all_posts"), nil]
+          @available_post_components ||= components.where(manifest_name: "blogs").map do |component|
+            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
+          end.unshift [t(".all_posts"), nil]
+        end
+
+        def available_meeting_components
+          @available_meeting_components ||= components.where(manifest_name: "meetings").map do |component|
+            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
+          end.unshift [t(".all_meetings"), nil]
         end
 
         def available_posts
@@ -43,6 +46,10 @@ module Decidim
 
         def posts_component
           @posts_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:posts_component_id))
+        end
+
+        def meetings_component
+          @meetings_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:meetings_component_id))
         end
 
         def component
