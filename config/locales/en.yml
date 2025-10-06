@@ -87,6 +87,7 @@ en:
         sidebar_right_stack:
           name: Sidebar + 2 items vertical (Meetings and Posts)
         sidebar_right_stack_settings_form:
+          all_posts: Show posts from any blog
           body: Content
           filter_posts:
             name: Show only posts writen by

@@ -30,7 +30,7 @@ module Decidim
             .map do |component|
               ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})",
                 component.id]
-            end.unshift [t(".all"), nil]
+            end.unshift [t(".all_posts"), nil]
         end
 
         def available_posts

@@ -31,16 +31,18 @@ module Decidim
         end
 
         def posts
-          scope = Blogs::Post.where(component: component || components)
+          return Blogs::Post.none unless posts_component
 
-          case model.settings.filter
+          scope = Blogs::Post.where(component: posts_component)
+
+          case model.settings.filter_posts
           when "organization"
             scope = scope.where(decidim_author_type: "Decidim::Organization")
           when "users"
             scope = scope.where(decidim_author_type: "Decidim::UserBaseEntity")
           end
 
-          scope.limit(posts_to_show).order(created_at: :desc)
+          scope.order(created_at: :desc)
         end
 
         def meetings_component
