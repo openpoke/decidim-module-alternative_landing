@@ -25,9 +25,12 @@ module Decidim
         end
 
         def meetings
-          @meetings ||= Meetings::Meeting.upcoming.where(
-            component: component || components
-          )
+          return Meetings::Meeting.none unless meetings_component
+
+          Meetings::Meeting
+            .upcoming
+            .where(component: meetings_component)
+            .order(start_time: :asc)
         end
 
         def posts
