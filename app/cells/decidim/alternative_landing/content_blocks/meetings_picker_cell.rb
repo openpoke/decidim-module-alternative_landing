@@ -8,7 +8,7 @@ module Decidim
           render
         end
 
-        alias component model
+        alias meetings_component model
 
         def form
           options[:form]
@@ -22,17 +22,23 @@ module Decidim
           "#{form.object_name}[#{field}]"
         end
 
-        def method_name
-          field.to_s.sub(/s$/, "_ids")
+        def selected_ids
+          ids_string = form.object[:meeting_ids] || ""
+          ids_string.split(",").map(&:strip).compact_blank.map(&:to_i)
         end
 
-        def selected_ids
-          form.object.settings[:meeting_ids] || []
+        def meetings
+          return Meetings::Meeting.none unless meetings_component
+
+          Meetings::Meeting
+            .upcoming
+            .where(component: meetings_component)
+            .order(start_time: :asc)
         end
 
         def decorated_meetings
-          meetings.each do |meeting|
-            yield Decidim::Meetings::MeetingPresenter.new(meeting)
+          meetings.map do |meeting|
+            Decidim::Meetings::MeetingPresenter.new(meeting)
           end
         end
       end
