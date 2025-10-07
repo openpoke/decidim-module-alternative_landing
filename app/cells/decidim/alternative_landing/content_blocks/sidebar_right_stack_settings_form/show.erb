@@ -58,6 +58,10 @@
           <%= settings_fields.select :meetings_component_id, available_meeting_components %>
         </div>
         <div class="row column">
+          <%= cell "decidim/alternative_landing/content_blocks/meetings_picker",
+          meetings_component,
+          form: settings_fields,
+          field: :meeting_ids %>
         </div>
       </div>
     </div>

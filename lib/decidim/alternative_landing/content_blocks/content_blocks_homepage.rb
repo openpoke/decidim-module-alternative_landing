@@ -30,7 +30,7 @@ def initialize_homepage_content_blocks
         settings.attribute :link_text_meetings, type: :text, translated: true
         settings.attribute :link_url_meetings, type: :text, translated: true
         settings.attribute :meetings_component_id, type: :integer
-        settings.attribute :meeting__ids, type: :string
+        settings.attribute :meeting_ids, type: :json, default: []
         settings.attribute :title_posts, type: :text, translated: true
         settings.attribute :link_text_posts, type: :text, translated: true
         settings.attribute :link_url_posts, type: :text, translated: true

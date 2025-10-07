@@ -3,7 +3,7 @@
 module Decidim
   module AlternativeLanding
     module ContentBlocks
-      class BaseCell < BaseCell
+      class MeetingsPickerCell < BaseCell
         def show
           render
         end
@@ -19,7 +19,7 @@ module Decidim
         end
 
         def form_name
-          "#{form.object_name}[#{method_name}]"
+          "#{form.object_name}[#{field}]"
         end
 
         def method_name
@@ -27,7 +27,7 @@ module Decidim
         end
 
         def selected_ids
-          form.object.send(method_name)
+          form.object.settings[:meeting_ids] || []
         end
 
         def decorated_meetings
