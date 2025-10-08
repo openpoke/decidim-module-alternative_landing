@@ -25,9 +25,10 @@ module Decidim
         end
 
         def meetings
-          @meetings ||= Meetings::Meeting.upcoming.where(
-            component: component || components
-          )
+          meeting_ids = Array(model.settings.meeting_ids).map(&:to_i).compact_blank
+          return Meetings::Meeting.none if meeting_ids.empty?
+
+          Meetings::Meeting.where(id: meeting_ids)
         end
 
         def posts
@@ -43,10 +44,6 @@ module Decidim
           end
 
           scope.order(created_at: :desc)
-        end
-
-        def posts_component
-          @posts_component ||= Decidim::Component.find_by(id: model.settings.posts_component_id)
         end
       end
     end

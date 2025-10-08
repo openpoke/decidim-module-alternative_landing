@@ -19,7 +19,7 @@ module Decidim
         end
 
         def form_name
-          "#{form.object_name}[#{field}]"
+          "#{form.object_name}[settings][#{field}]"
         end
 
         def selected_ids
@@ -33,8 +33,8 @@ module Decidim
         end
 
         def decorated_meetings
-          meetings.map do |meeting|
-            Decidim::Meetings::MeetingPresenter.new(meeting)
+          meetings.each do |meeting|
+            yield Decidim::Meetings::MeetingPresenter.new(meeting)
           end
         end
       end

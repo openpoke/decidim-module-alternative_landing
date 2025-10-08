@@ -1,10 +1,9 @@
 import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const tagContainers = document.querySelectorAll("#meetings_list");
-  console.log(tagContainers[0].dataset);
+  const meetingContainers = document.querySelectorAll("#meetings_list");
 
-  tagContainers.forEach((container) => {
+  meetingContainers.forEach((container) => {
     const { tmName, tmItems, tmNoResults } = container.dataset
     const config = {
       plugins: ["remove_button", "dropdown_input"],
