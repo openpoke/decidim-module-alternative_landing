@@ -3,7 +3,7 @@ import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 document.addEventListener("DOMContentLoaded", () => {
   const tagContainers = document.querySelectorAll("#meetings_list");
   console.log(tagContainers[0].dataset);
-  
+
   tagContainers.forEach((container) => {
     const { tmName, tmItems, tmNoResults } = container.dataset
     const config = {

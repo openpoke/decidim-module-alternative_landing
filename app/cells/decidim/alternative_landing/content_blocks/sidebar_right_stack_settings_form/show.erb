@@ -51,15 +51,7 @@
           <%= settings_fields.translated :text_field, :"link_url_meetings", label: t(".link_url") %>
         </div>
         <div class="row column">
-          <% if meetings_component %>
-            <p class="callout secondary">
-              <%= t(".info_meetings", component: translated_attribute(meetings_component.name), space: translated_attribute(meetings_component.participatory_space.title)) %>
-            </p>
-          <% end %>
-          <%= settings_fields.select :meetings_component_id, available_meeting_components %>
-        </div>
-        <div class="row column">
-          <%= cell "decidim/alternative_landing/content_blocks/meetings_picker", meetings_component, form:, field: :meeting_ids %>
+          <%= cell "decidim/alternative_landing/content_blocks/meetings_picker", component, form:, field: :meeting_ids %>
         </div>
       </div>
     </div>

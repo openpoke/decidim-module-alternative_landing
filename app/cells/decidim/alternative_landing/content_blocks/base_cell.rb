@@ -30,12 +30,6 @@ module Decidim
           end.unshift [t(".all_posts"), nil]
         end
 
-        def available_meeting_components
-          @available_meeting_components ||= components.where(manifest_name: "meetings").map do |component|
-            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
-          end.unshift [t(".all_meetings"), nil]
-        end
-
         def available_posts
           [
             [t("sidebar_right_stack_settings_form.filter_posts.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
@@ -46,10 +40,6 @@ module Decidim
 
         def posts_component
           @posts_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:posts_component_id))
-        end
-
-        def meetings_component
-          @meetings_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:meetings_component_id))
         end
 
         def component
