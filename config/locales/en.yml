@@ -87,6 +87,7 @@ en:
         sidebar_right_stack:
           name: Sidebar + 2 items vertical (Meetings and Posts)
         sidebar_right_stack_settings_form:
+          all_meetings: Show meetings from any space
           all_posts: Show posts from any blog
           body: Content
           filter_posts:
@@ -95,7 +96,9 @@ en:
             organization: Organization
             users: Users
           image: Background image
+          info_meetings: Only meetings from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
           info_posts: Only posts from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
+          let_me_choose_individual_meetings: Let me choose the meetings
           link_text: Link text
           link_url: Link URL
           meetings_picker:

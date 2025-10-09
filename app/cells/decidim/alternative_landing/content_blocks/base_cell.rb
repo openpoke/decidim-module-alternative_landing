@@ -38,8 +38,25 @@ module Decidim
           ]
         end
 
+        def available_meeting_components
+          base_components = components.where(manifest_name: "meetings").map do |component|
+            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
+          end
+
+          special_options = [
+            [t(".all_meetings"), nil],
+            [t(".let_me_choose_individual_meetings"), "custom"]
+          ]
+
+          @available_meeting_components ||= special_options + base_components
+        end
+
         def posts_component
           @posts_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:posts_component_id))
+        end
+
+        def meetings_component
+          @meetings_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:meetings_component_id))
         end
 
         def component
