@@ -25,18 +25,20 @@ module Decidim
         end
 
         def meetings
-          case model.settings.meetings_component_id
-          when "meeting-picker"
-            meeting_ids = Array(model.settings[:meeting_ids]).map(&:to_i).compact_blank
-            return Meetings::Meeting.none if meeting_ids.empty?
+          component_id = model.settings.meetings_component_id
+          meeting_ids = Array(model.settings[:meeting_ids]).map(&:to_i).compact_blank
 
-            Meetings::Meeting.where(id: meeting_ids)
+          scope = Decidim::Meetings::Meeting.upcoming.order(start_time: :asc)
+
+          case component_id
+          when "meeting-picker"
+            return Decidim::Meetings::Meeting.none if meeting_ids.empty?
+
+            Decidim::Meetings::Meeting.where(id: meeting_ids)
           when "all"
-            Meetings::Meeting.upcoming.order(start_time: :asc)
+            scope
           else
-            Meetings::Meeting.upcoming
-                             .where(component: meetings_component)
-                             .order(start_time: :asc)
+            scope.where(component: meetings_component)
           end
         end
 
