@@ -44,8 +44,8 @@ module Decidim
           end
 
           special_options = [
-            [t(".all_meetings"), nil],
-            [t(".let_me_choose_individual_meetings"), "custom"]
+            [t(".all_meetings"), "all"],
+            [t(".let_me_choose_individual_meetings"), "meeting-picker"]
           ]
 
           @available_meeting_components ||= special_options + base_components

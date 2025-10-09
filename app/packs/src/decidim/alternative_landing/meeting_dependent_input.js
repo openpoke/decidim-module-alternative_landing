@@ -9,7 +9,7 @@ $(() => {
     dependentFieldsSelector: ".meetings-fields--individual-picker",
     dependentInputSelector: "input",
     enablingCondition: ($field) => {
-      return $field.val() === "custom"
+      return $field.val() === "meeting-picker"
     }
   });
 })
