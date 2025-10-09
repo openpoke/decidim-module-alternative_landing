@@ -23,7 +23,7 @@ module Decidim
         end
 
         def selected_ids
-          Array(form.object[:meeting_ids]).map(&:to_i)
+          form.object["settings"]&.meeting_ids&.map(&:to_i) || []
         end
 
         def meetings
