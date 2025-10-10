@@ -33,7 +33,7 @@ module Decidim
         end
 
         def decorated_meetings
-          meetings.each do |meeting|
+          meetings.map do |meeting|
             yield Decidim::Meetings::MeetingPresenter.new(meeting)
           end
         end

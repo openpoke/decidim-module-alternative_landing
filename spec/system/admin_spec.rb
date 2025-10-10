@@ -217,7 +217,7 @@ describe "Admin manages organization homepage" do
       select "Show posts from any blog", from: "Posts component"
       select "Organization", from: "Show only posts writen by"
 
-      click_link_or_button "Update"
+      click_on "Update"
       visit decidim.root_path
 
       within ".alternative-landing.sidebar-right-stack" do
@@ -227,7 +227,6 @@ describe "Admin manages organization homepage" do
         expect(page).to have_text "UPCOMING MEETINGS"
         expect(page).to have_link "See all", href: "example.org/example-path-meetings"
         expect(page).to have_text "LATEST BLOG POSTS"
-        expect(page).to have_content "XXXXXXX"
         expect(page).to have_link "See all", href: "example.org/example-path-posts"
       end
     end
