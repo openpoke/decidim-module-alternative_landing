@@ -9,4 +9,5 @@
     </p>
   <% end %>
   <%= settings_fields.select :component_id, available_components %>
+  <%= settings_fields.select :filter, available_filters, label: t("latest_blog_posts_settings_form.filter.name", scope: "decidim.alternative_landing.content_blocks") %>
 <% end %>

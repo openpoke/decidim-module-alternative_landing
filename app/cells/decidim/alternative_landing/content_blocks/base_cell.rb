@@ -49,6 +49,16 @@ module Decidim
             component_id = record.settings.try("#{component_key}_id")
             component_relation.find_by(id: component_id) if component_id.present?
           end
+        def available_filters
+          [
+            [t("latest_blog_posts_settings_form.filter.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
+            [t("latest_blog_posts_settings_form.filter.organization", scope: "decidim.alternative_landing.content_blocks"), "organization"],
+            [t("latest_blog_posts_settings_form.filter.users", scope: "decidim.alternative_landing.content_blocks"), "users"]
+          ]
+        end
+
+        def component
+          @component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:component_id))
         end
 
         def components
