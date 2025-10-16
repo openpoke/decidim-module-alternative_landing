@@ -88,7 +88,7 @@ en:
           name: Sidebar + 2 items vertical (Meetings and Posts)
         sidebar_right_stack_settings_form:
           all_meetings: Show meetings from any space
-          all_posts: Show posts from any blog
+          all: Show posts from any blog
           body: Content
           filter_posts:
             all: All

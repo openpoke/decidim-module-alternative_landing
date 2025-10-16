@@ -18,16 +18,11 @@ module Decidim
           ].flatten.compact
         end
 
-        def available_components
-          @available_components ||= components.where(manifest_name:).map do |component|
+        def available_components(manifest_name)
+          @available_components ||= {}
+          @available_components[manifest_name] ||= components.where(manifest_name:).map do |component|
             ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
           end.unshift [t(".all"), nil]
-        end
-
-        def available_post_components
-          @available_post_components ||= components.where(manifest_name: "blogs").map do |component|
-            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
-          end.unshift [t(".all_posts"), nil]
         end
 
         def available_posts
@@ -39,16 +34,12 @@ module Decidim
         end
 
         def available_meeting_components
-          base_components = components.where(manifest_name: "meetings").map do |component|
-            ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
-          end
-
           special_options = [
             [t(".all_meetings"), "all"],
             [t(".let_me_choose_individual_meetings"), "meeting-picker"]
           ]
 
-          @available_meeting_components ||= special_options + base_components
+          @available_meeting_components ||= special_options + available_components("meetings")
         end
 
         def posts_component
