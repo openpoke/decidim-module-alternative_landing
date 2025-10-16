@@ -78,9 +78,6 @@ en:
           title: Title
           filter:
             name: Show only posts writen by
-            all: All
-            organization: Organization
-            users: Users
         selected_consultations:
           name: Selected consultations
           see_all: See all consultations

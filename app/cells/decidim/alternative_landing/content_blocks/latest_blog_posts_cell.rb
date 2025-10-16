@@ -22,7 +22,7 @@ module Decidim
         def posts
           scope = Blogs::Post.where(component: component || components)
 
-          case model.settings.filter
+          case model.settings[:filter]
           when "organization"
             scope = scope.where(decidim_author_type: "Decidim::Organization")
           when "users"
