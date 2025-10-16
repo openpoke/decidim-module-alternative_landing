@@ -53,9 +53,9 @@
         </div>
         <div class="meetings-fields">
           <div class="row column">
-            <% if meetings_component %>
+            <% if component(:meetings_component) %>
               <p class="callout secondary">
-                <%= t(".info_meetings", component: translated_attribute(meetings_component.name), space: translated_attribute(meetings_component.participatory_space.title)) %>
+                <%= t(".info_meetings", component: translated_attribute(component(:meetings_component).name), space: translated_attribute(component(:meetings_component).participatory_space.title)) %>
               </p>
             <% end %>
             <%= settings_fields.select :meetings_component_id, available_meeting_components %>
@@ -87,9 +87,9 @@
           <%= settings_fields.translated :text_field, :link_url_posts, label: t(".link_url") %>
         </div>
         <div class="row column">
-          <% if posts_component %>
+          <% if component(:posts_component) %>
             <p class="callout secondary">
-              <%= t(".info_posts", component: translated_attribute(posts_component.name), space: translated_attribute(posts_component.participatory_space.title)) %>
+              <%= t(".info_posts", component: translated_attribute(component(:posts_component).name), space: translated_attribute(component(:posts_component).participatory_space.title)) %>
             </p>
           <% end %>
           <%= settings_fields.select :posts_component_id, available_components("blogs") %>

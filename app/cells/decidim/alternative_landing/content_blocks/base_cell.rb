@@ -42,20 +42,21 @@ module Decidim
           @available_meeting_components ||= special_options + available_components("meetings")
         end
 
-        def posts_component
-          @posts_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:posts_component_id))
-        end
-
-        def meetings_component
-          @meetings_component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:meetings_component_id))
-        end
-
-        def component
-          @component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:component_id))
+        def component(component_key = :component)
+          @component_cache ||= {}
+          @component_cache[component_key] ||= begin
+            record = defined?(form) ? form.object : model
+            component_id = record.settings.try("#{component_key}_id")
+            component_relation.find_by(id: component_id) if component_id.present?
+          end
         end
 
         def components
           @components ||= Decidim::Component.where(participatory_space: participatory_spaces)
+        end
+
+        def component_relation
+          components
         end
 
         def manifest_name
