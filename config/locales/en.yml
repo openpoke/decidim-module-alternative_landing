@@ -72,6 +72,8 @@ en:
           all: Show posts from any blog
           component_id: Blog component
           count: Number of items
+          filter:
+            name: Show only posts writen by
           info: Only posts from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
           link_text: Link text
           link_url: Link URL
@@ -87,8 +89,8 @@ en:
         sidebar_right_stack:
           name: Sidebar + 2 items vertical (Meetings and Posts)
         sidebar_right_stack_settings_form:
-          all_meetings: Show meetings from any space
           all: Show posts from any blog
+          all_meetings: Show meetings from any space
           body: Content
           filter_posts:
             all: All
