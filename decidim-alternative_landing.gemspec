@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["vera@platoniq.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/Platoniq/decidim-module-alternative_landing"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.3"
 
   s.name = "decidim-alternative_landing"
   s.summary = "Decidim Landing Page"

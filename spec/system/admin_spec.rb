@@ -207,13 +207,13 @@ describe "Admin manages organization homepage" do
       fill_in :content_block_settings_link_url_sidebar_en, with: "example.org/example-path-sidebar"
       fill_in :content_block_settings_title_meetings_en, with: "Upcoming meetings"
       fill_in :content_block_settings_link_text_meetings_en, with: "See all"
-      expect(page).to have_select("Meetings component", selected: "Show meetings from any space")
+      expect(page).to have_select(:content_block_settings_meetings_component_id, selected: ["Show posts from any blog"])
       select "Show meetings from any space", from: "Meetings component"
       fill_in :content_block_settings_link_url_meetings_en, with: "example.org/example-path-meetings"
       fill_in :content_block_settings_title_posts_en, with: "Latest blog posts"
       fill_in :content_block_settings_link_text_posts_en, with: "See all"
       fill_in :content_block_settings_link_url_posts_en, with: "example.org/example-path-posts"
-      expect(page).to have_select("Posts component", selected: "Show posts from any blog")
+      expect(page).to have_select(:content_block_settings_posts_component_id, selected: "Show posts from any blog")
       select "Show posts from any blog", from: "Posts component"
       select "Organization", from: "Show only posts writen by"
 
