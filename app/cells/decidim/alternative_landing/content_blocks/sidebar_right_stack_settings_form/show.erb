@@ -1,39 +1,103 @@
-<% form.fields_for :settings, form.object.settings do |settings_fields| %>
-
-  <h3><%= t(".settings_sidebar") %></h2>
-  <div class="grid-x">
-    <%= settings_fields.translated :text_field, :"title_sidebar", label: t(".title_sidebar") %>
-    <div class="large">
-      <%= settings_fields.translated :text_area, :"body", rows: 5, label: t(".body") %>
+<%= append_stylesheet_pack_tag "decidim_alternative_landing", media: "all" %>
+<%= append_javascript_pack_tag "decidim_alternative_landing" %>
+<div class="form__wrapper">
+  <% form.fields_for :settings, form.object.settings do |settings_fields| %>
+    <div class="card" data-component="accordion" id="accordion-homepage_sidebar_title">
+      <div class="card-divider">
+        <div class="card-divider-button" data-open="true" data-controls="panel-homepage_sidebar_title" type="button">
+          <%= icon "arrow-right-s-line" %>
+          <h2 class="card-title" id="homepage_sidebar_title">
+            <%= t(".settings_sidebar") %>
+          </h2>
+        </div>
+      </div>
+      <div id="panel-homepage_sidebar_title" class="card-section">
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :title_sidebar, label: t(".title_sidebar") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_area, :body, rows: 5, label: t(".body") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_text_sidebar, label: t(".link_text") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_url_sidebar, label: t(".link_url") %>
+        </div>
+        <div class="row column">
+          <% form.fields_for :images, form.object.images do |images_fields| %>
+            <%= images_fields.upload :background_image, label: t(".image") %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="large">
-      <%= settings_fields.translated :text_field, :"link_text_sidebar", label: t(".link_text") %>
-      <%= settings_fields.translated :text_field, :"link_url_sidebar", label: t(".link_url") %>
+
+    <div class="card" data-component="accordion" id="accordion-homepage_meetings_title">
+      <div class="card-divider">
+        <div class="card-divider-button" data-open="true" data-controls="panel-homepage_meetings_title" type="button">
+          <%= icon "arrow-right-s-line" %>
+          <h2 class="card-title" id="homepage_meetings_title">
+            <%= t(".settings_meetings") %>
+          </h2>
+        </div>
+      </div>
+      <div id="panel-homepage_meetings_title" class="card-section">
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :title_meetings, label: t(".title_meetings") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_text_meetings, label: t(".link_text") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_url_meetings, label: t(".link_url") %>
+        </div>
+        <div class="meetings-fields">
+          <div class="row column">
+            <% if component(:meetings_component) %>
+              <p class="callout secondary">
+                <%= t(".info_meetings", component: translated_attribute(component(:meetings_component).name), space: translated_attribute(component(:meetings_component).participatory_space.title)) %>
+              </p>
+            <% end %>
+            <%= settings_fields.select :meetings_component_id, available_meeting_components %>
+          </div>
+          <div class="row column meetings-fields--individual-picker">
+            <%= cell "decidim/alternative_landing/content_blocks/meetings_picker", component, form:, field: :meeting_ids %>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <% form.fields_for :images, form.object.images do |images_fields| %>
-      <%= images_fields.upload :background_image, label: t(".image") %>
-    <% end %>
-  </div>
-
-  <h3><%= t(".settings_meetings") %></h2>
-  <div class="grid-x">
-    <%= settings_fields.translated :text_field, :"title_meetings", label: t(".title_meetings") %>
-    <div class="large">
-      <%= settings_fields.translated :text_field, :"link_text_meetings", label: t(".link_text") %>
-      <%= settings_fields.translated :text_field, :"link_url_meetings", label: t(".link_url") %>
+    <div class="card" data-component="accordion" id="accordion-homepage_posts_title">
+      <div class="card-divider">
+        <div class="card-divider-button" data-open="true" data-controls="panel-homepage_posts_title" type="button">
+          <%= icon "arrow-right-s-line" %>
+          <h2 class="card-title" id="homepage_posts_title">
+            <%= t(".settings_posts") %>
+          </h2>
+        </div>
+      </div>
+      <div id="panel-homepage_posts_title" class="card-section">
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :title_posts, label: t(".title_posts") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_text_posts, label: t(".link_text") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.translated :text_field, :link_url_posts, label: t(".link_url") %>
+        </div>
+        <div class="row column">
+          <% if component(:posts_component) %>
+            <p class="callout secondary">
+              <%= t(".info_posts", component: translated_attribute(component(:posts_component).name), space: translated_attribute(component(:posts_component).participatory_space.title)) %>
+            </p>
+          <% end %>
+          <%= settings_fields.select :posts_component_id, available_components("blogs") %>
+        </div>
+        <div class="row column">
+          <%= settings_fields.select :filter_posts, available_posts, label: t("sidebar_right_stack_settings_form.filter_posts.name", scope: "decidim.alternative_landing.content_blocks") %>
+        </div>
+      </div>
     </div>
-  </div>
-
-
-  <h3><%= t(".settings_posts") %></h2>
-  <div class="grid-x">
-    <%= settings_fields.translated :text_field, :"title_posts", label: t(".title_posts") %>
-    <div class="large">
-      <%= settings_fields.translated :text_field, :"link_text_posts", label: t(".link_text") %>
-      <%= settings_fields.translated :text_field, :"link_url_posts", label: t(".link_url") %>
-    </div>
-  </div>
-<% end %>
-
-
+  <% end %>
+</div>

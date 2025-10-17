@@ -18,18 +18,45 @@ module Decidim
           ].flatten.compact
         end
 
-        def available_components
-          @available_components ||= components.where(manifest_name:).map do |component|
+        def available_components(manifest_name)
+          @available_components ||= {}
+          @available_components[manifest_name] ||= components.where(manifest_name:).map do |component|
             ["#{translated_attribute(component.name)} (#{translated_attribute(component.participatory_space.title)})", component.id]
           end.unshift [t(".all"), nil]
         end
 
-        def component
-          @component ||= components.find_by(id: (defined?(form) ? form.object : model).settings.try(:component_id))
+        def available_posts
+          [
+            [t("sidebar_right_stack_settings_form.filter_posts.all", scope: "decidim.alternative_landing.content_blocks"), "all"],
+            [t("sidebar_right_stack_settings_form.filter_posts.organization", scope: "decidim.alternative_landing.content_blocks"), "organization"],
+            [t("sidebar_right_stack_settings_form.filter_posts.users", scope: "decidim.alternative_landing.content_blocks"), "users"]
+          ]
+        end
+
+        def available_meeting_components
+          special_options = [
+            [t(".all_meetings"), "all"],
+            [t(".let_me_choose_individual_meetings"), "meeting-picker"]
+          ]
+
+          @available_meeting_components ||= special_options + available_components("meetings")
+        end
+
+        def component(component_key = :component)
+          @component_cache ||= {}
+          @component_cache[component_key] ||= begin
+            record = defined?(form) ? form.object : model
+            component_id = record.settings.try("#{component_key}_id")
+            component_relation.find_by(id: component_id) if component_id.present?
+          end
         end
 
         def components
           @components ||= Decidim::Component.where(participatory_space: participatory_spaces)
+        end
+
+        def component_relation
+          components
         end
 
         def manifest_name
