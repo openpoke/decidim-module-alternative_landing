@@ -25,15 +25,32 @@ module Decidim
         end
 
         def meetings
-          @meetings ||= Meetings::Meeting.upcoming.where(
-            component: component || components
-          )
+          meeting_ids = Array(model.settings[:meeting_ids]).map(&:to_i).compact_blank
+          scope = Decidim::Meetings::Meeting.upcoming.order(start_time: :asc)
+
+          case model.settings.meetings_component_id
+          when "meeting-picker"
+            return Decidim::Meetings::Meeting.none if meeting_ids.empty?
+
+            Decidim::Meetings::Meeting.where(id: meeting_ids)
+          when "all"
+            scope
+          else
+            scope.where(component: component(:meetings_component))
+          end
         end
 
         def posts
-          @posts ||= Blogs::Post.where(
-            component: component || components
-          ).order(created_at: :desc)
+          scope = posts_component = component(:posts_component)
+          scope = scope ? Blogs::Post.where(component: posts_component) : Blogs::Post.all
+
+          scope = case model.settings.filter_posts
+                  when "organization" then scope.where(decidim_author_type: "Decidim::Organization")
+                  when "users" then scope.where(decidim_author_type: "Decidim::UserBaseEntity")
+                  else scope
+                  end
+
+          scope.order(created_at: :desc)
         end
       end
     end

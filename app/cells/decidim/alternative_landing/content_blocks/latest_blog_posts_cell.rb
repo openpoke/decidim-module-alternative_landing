@@ -20,16 +20,19 @@ module Decidim
         end
 
         def posts
-          @posts ||= Blogs::Post.where(
-            component: component || components
-          ).limit(posts_to_show).order(created_at: :desc)
+          scope = Blogs::Post.where(component: component || components)
+
+          case model.settings[:filter]
+          when "organization"
+            scope = scope.where(decidim_author_type: "Decidim::Organization")
+          when "users"
+            scope = scope.where(decidim_author_type: "Decidim::UserBaseEntity")
+          end
+
+          scope.limit(posts_to_show).order(created_at: :desc)
         end
 
         private
-
-        def manifest_name
-          "blogs"
-        end
 
         # A MD5 hash of model attributes because is needed because
         # it ensures the cache version value will always be the same size

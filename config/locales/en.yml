@@ -72,6 +72,8 @@ en:
           all: Show posts from any blog
           component_id: Blog component
           count: Number of items
+          filter:
+            name: Show only posts writen by
           info: Only posts from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
           link_text: Link text
           link_url: Link URL
@@ -87,10 +89,23 @@ en:
         sidebar_right_stack:
           name: Sidebar + 2 items vertical (Meetings and Posts)
         sidebar_right_stack_settings_form:
+          all: Show posts from any blog
+          all_meetings: Show meetings from any space
           body: Content
+          filter_posts:
+            all: All
+            name: Show only posts writen by
+            organization: Organization
+            users: Users
           image: Background image
+          info_meetings: Only meetings from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
+          info_posts: Only posts from '%{component}' in '%{space}' will be shown. You can change it with the selector below.
+          let_me_choose_individual_meetings: Let me choose the meetings
           link_text: Link text
           link_url: Link URL
+          meetings_picker:
+            choose_meetings: Choose meetings
+            no_meetings: No meetings found
           settings_meetings: Meetings
           settings_posts: Posts
           settings_sidebar: Sidebar

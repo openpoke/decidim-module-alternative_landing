@@ -184,4 +184,51 @@ describe "Admin manages organization homepage" do
       end
     end
   end
+
+  context "when editing a sidebar right stack content block" do
+    let!(:alternative_landing_sidebar_right_stack_block) { create(:alternative_landing_sidebar_right_stack_block, organization:) }
+    let!(:meetings_component) { create(:component, manifest_name: "meetings", organization:) }
+    let!(:other_meetings_component) { create(:component, manifest_name: "meetings", organization:) }
+    let!(:other_meetings) { create_list(:meeting, 2, :upcoming, component: other_meetings_component) }
+    let!(:meetings) { create_list(:meeting, 2, :upcoming, component: meetings_component) }
+    let!(:blogs_component) { create(:component, manifest_name: "blogs", organization:) }
+    let!(:other_blogs_component) { create(:component, manifest_name: "blogs", organization:) }
+    let!(:blog_posts) { create_list(:post, 2, component: blogs_component) }
+    let!(:other_blog_posts) { create_list(:post, 2, component: other_blogs_component) }
+
+    before do
+      visit decidim_admin.edit_organization_homepage_content_block_path(alternative_landing_sidebar_right_stack_block.id)
+    end
+
+    it "updates the settings of the content block" do
+      fill_in :content_block_settings_title_sidebar_en, with: "This is a ramdom sidebar title"
+      fill_in :content_block_settings_body_en, with: "This is the body of the sidebar"
+      fill_in :content_block_settings_link_text_sidebar_en, with: "See more info"
+      fill_in :content_block_settings_link_url_sidebar_en, with: "example.org/example-path-sidebar"
+      fill_in :content_block_settings_title_meetings_en, with: "Upcoming meetings"
+      fill_in :content_block_settings_link_text_meetings_en, with: "See all"
+      expect(page).to have_select(:content_block_settings_meetings_component_id, selected: ["Show posts from any blog"])
+      select "Show meetings from any space", from: "Meetings component"
+      fill_in :content_block_settings_link_url_meetings_en, with: "example.org/example-path-meetings"
+      fill_in :content_block_settings_title_posts_en, with: "Latest blog posts"
+      fill_in :content_block_settings_link_text_posts_en, with: "See all"
+      fill_in :content_block_settings_link_url_posts_en, with: "example.org/example-path-posts"
+      expect(page).to have_select(:content_block_settings_posts_component_id, selected: "Show posts from any blog")
+      select "Show posts from any blog", from: "Posts component"
+      select "Organization", from: "Show only posts writen by"
+
+      click_on "Update"
+      visit decidim.root_path
+
+      within ".alternative-landing.sidebar-right-stack" do
+        expect(page).to have_text "THIS IS A RAMDOM SIDEBAR TITLE"
+        expect(page).to have_content "This is the body of the sidebar"
+        expect(page).to have_link "See more info", href: "example.org/example-path-sidebar"
+        expect(page).to have_text "UPCOMING MEETINGS"
+        expect(page).to have_link "See all", href: "example.org/example-path-meetings"
+        expect(page).to have_text "LATEST BLOG POSTS"
+        expect(page).to have_link "See all", href: "example.org/example-path-posts"
+      end
+    end
+  end
 end

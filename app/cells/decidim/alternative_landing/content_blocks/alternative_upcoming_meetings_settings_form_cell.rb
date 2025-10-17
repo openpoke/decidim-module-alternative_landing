@@ -5,10 +5,6 @@ module Decidim
     module ContentBlocks
       class AlternativeUpcomingMeetingsSettingsFormCell < BaseCell
         alias form model
-
-        def manifest_name
-          "meetings"
-        end
       end
     end
   end

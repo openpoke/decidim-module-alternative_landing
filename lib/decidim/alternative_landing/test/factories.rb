@@ -9,6 +9,29 @@ FactoryBot.define do
     scope_name { :homepage }
   end
 
+  factory :alternative_landing_sidebar_right_stack_block, parent: :alternative_landing_content_block do
+    manifest_name { :sidebar_right_stack }
+
+    settings do
+      {
+        title_sidebar: generate_localized_title,
+        body: Decidim::Faker::Localized.wrapped("<p>", "</p>") { Decidim::Faker::Localized.paragraph },
+        link_text_sidebar: Decidim::Faker::Localized.word,
+        link_url_sidebar: Decidim::Faker::Localized.literal("https://decidim.org"),
+        title_meetings: generate_localized_title,
+        link_text_meetings: Decidim::Faker::Localized.word,
+        link_url_meetings: Decidim::Faker::Localized.literal("https://decidim.org"),
+        meetings_component_id: nil,
+        meeting__ids: "",
+        title_posts: generate_localized_title,
+        link_text_posts: Decidim::Faker::Localized.word,
+        link_url_posts: Decidim::Faker::Localized.literal("https://decidim.org"),
+        posts_component_id: nil,
+        filter_posts: "all"
+      }
+    end
+  end
+
   factory :cover_full_block, parent: :alternative_landing_content_block do
     manifest_name { :cover_full }
     settings do
