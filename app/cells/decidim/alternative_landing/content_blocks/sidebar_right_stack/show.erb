@@ -14,7 +14,7 @@
       <p><%= translated_body %></p>
     </div>
     <div>
-      <a href="<%= translated_url("sidebar")%>" class="button button__sm md:button__lg button__secondary no-underline mt-4 mb-4">
+      <a href="<%= translated_url("sidebar") %>" class="button button__sm md:button__lg button__secondary no-underline mt-4 mb-4">
         <%= translated_link_text("sidebar") %>
       </a>
     </div>
@@ -29,7 +29,7 @@
         <div class="splide__slider">
           <div class="splide__track">
             <ul class="splide__list">
-              <% meetings.each do |meeting|%>
+              <% meetings.each do |meeting| %>
                 <li class="splide__slide min-h-[100px] ">
                   <%
                   formatted_date = l(meeting.start_time, format: :long)
@@ -54,13 +54,13 @@
 
     <div class="stack_two h-[40vh] w-[100vw] md:w-[50vw] grid grid-rows-3">
       <div class="w-[100vw] md:w-[50vw]">
-        <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("posts")%></h2>
+        <h2 class="mt-4 mb-4 text-5xl font-bold uppercase"><%= decidim_sanitize translated_title("posts") %></h2>
       </div>
-      <div id="alternative-landing-sidebar-splide-post"class="splide w-[100vw] md:w-[50vw] m-auto">
+      <div id="alternative-landing-sidebar-splide-post" class="splide w-[100vw] md:w-[50vw] m-auto">
         <div class="splide__slider">
           <div class="splide__track">
             <ul class="splide__list">
-              <% posts.each do |post|%>
+              <% posts.each do |post| %>
                 <li class="splide__slide post">
                   <h3 class="text-2xl"><%= translated_attribute(post.title) %></h3>
                 </li>

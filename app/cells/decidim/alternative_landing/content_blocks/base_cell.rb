@@ -59,10 +59,6 @@ module Decidim
           components
         end
 
-        def manifest_name
-          raise NotImplementedError
-        end
-
         def colors
           model.settings.to_h.select { |k, _v| k.match?(/color_/) }
         end
