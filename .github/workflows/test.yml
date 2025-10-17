@@ -28,7 +28,6 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
-      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -59,3 +58,9 @@ jobs:
         with:
           name: screenshots
           path: ./spec/decidim_dummy_app/tmp/screenshots
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: openpoke/decidim-module-alternative_landing

@@ -1,8 +1,9 @@
 # Decidim::AlternativeLanding - Additional Content Blocks For Decidim
 
-[![[CI] Test](https://github.com/Platoniq/decidim-module-alternative_landing/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-alternative_landing/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/Platoniq/decidim-module-alternative_landing/badge.svg?branch=main)](https://coveralls.io/github/Platoniq/decidim-module-alternative_landing?branch=main)
-[![Maintainability](https://api.codeclimate.com/v1/badges/565a00f5d7d1ed9879e7/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-alternative_landing/maintainability)
+[![[CI] Lint](https://github.com/openpoke/decidim-module-alternative_landing/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-alternative_landing/actions/workflows/lint.yml)
+[![[CI] Test](https://github.com/openpoke/decidim-module-alternative_landing/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-alternative_landing/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/openpoke/decidim-module-alternative_landing/graph/badge.svg?token=66Bj9xYLjv)](https://codecov.io/gh/openpoke/decidim-module-alternative_landing)
+[![Maintainability](https://qlty.sh/gh/openpoke/projects/decidim-module-alternative_landing/maintainability.svg)](https://qlty.sh/gh/openpoke/projects/decidim-module-alternative_landing)
 
 This module provides alternative and additional content blocks for the Decidim Homepage and Process Groups homepages.
 
@@ -24,39 +25,28 @@ We welcome PR with additional content blocks that can expand similar functionali
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-alternative_landing", git: "https://github.com/Platoniq/decidim-module-alternative_landing"
+gem "decidim-alternative_landing", git: "https://github.com/openpoke/decidim-module-alternative_landing"
 ```
 
 And then execute:
 
-```bash
+```
 bundle
-bundle exec rails decidim_alternative_landing:webpacker:install
+bin/rails decidim:upgrade
+bin/rails db:migrate
 ```
 
-### Upgrade from 0.2.x to 0.3.x
-
-As decidim renamed its `upcoming_meetings` to `upcoming_events` in the 0.25 version, if you are upgrading from an
-alternative landing version prior to 0.3 you need to run a task to change the manifest name of the content blocks with
-this manifest.
-
-You just need to download and run the task below **before deploying your application to 0.25.x and above** by connecting
-to the server you are going to upgrade:
-
-```bash
-wget https://raw.githubusercontent.com/Platoniq/decidim-module-alternative_landing/release/0.26-stable/lib/tasks/alternative_landing_rename_upcoming_meetings.rake -P lib/tasks
-bundle exec rake alternative_landing:rename_upcoming_meetings:up
-```
-
-If you need to undo the changes made you can run:
-
-```bash
-bundle exec rake alternative_landing:rename_upcoming_meetings:down
-```
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-alternative_landing` gem will run the following two tasks (that can also be run manually if you consider):
+>
+> ```bash
+> bin/rails decidim_alternative_landing:install:migrations
+> ```
 
 ## Contributing
 
-See [Decidim](https://github.com/Platoniq/decidim-module-alternative_landing).
+See [Decidim](https://github.com/openpoke/decidim-module-alternative_landing).
 
 ### Developing
 
