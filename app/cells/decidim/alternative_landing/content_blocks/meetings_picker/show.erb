@@ -1,0 +1,14 @@
+<label for="meetings_list">
+  <%= t("name", scope: "decidim.components.meetings") %>
+
+  <select id="meetings_list"
+          placeholder="<%= t("meetings_picker.choose_meetings", scope: "decidim.alternative_landing.content_blocks.sidebar_right_stack_settings_form") %>"
+          data-tm-name="<%= form_name %>"
+          data-tm-items="<%= selected_ids.to_json %>"
+          data-tm-no-results="<%= t("meetings_picker.no_meetings", scope: "decidim.alternative_landing.content_blocks.sidebar_right_stack_settings_form") %>"
+          class="mt-4" multiple>
+    <% decorated_meetings do |meeting| %>
+      <option value="<%= meeting.id %>"><%= decidim_sanitize translated_attribute(meeting.title) %> (<%= decidim_sanitize meeting.reference %>)</option>
+    <% end %>
+  </select>
+</label>
